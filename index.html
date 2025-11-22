@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="risk512.png" type="image/png">
+    <title>Hazardeous</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Indie+Flower&family=Sacramento&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- GLOBAL & UTILITIES --- */
+        :root {
+            --danger-red: #ff0000;
+            --danger-dark: #700000;
+            --sweet-pink: #ffdde1;
+            --sweet-gold: #ffd700;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Black Ops One', cursive;
+            user-select: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .full-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: all 0.5s;
+        }
+
+        /* --- PAGE 1: DANGER ENTRY --- */
+        #page1 {
+            background-color: var(--danger-dark);
+            color: var(--danger-red);
+            animation: alarmFlash 0.5s infinite alternate;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .warning-text {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .sub-warning {
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        @keyframes alarmFlash {
+            from {
+                background-color: var(--danger-dark);
+            }
+
+            to {
+                background-color: #300000;
+            }
+        }
+
+        /* --- PAGE 2: DANGEROUS BUTTON --- */
+        #page2 {
+            background-color: #000;
+            color: white;
+        }
+
+        .danger-btn {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #ff5555 0%, #ff0000 100%);
+            border: 5px solid #8b0000;
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--danger-red), inset 0 0 20px #fff;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px #000;
+            animation: pulseBtn 1s infinite alternate;
+        }
+
+        .danger-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 10px var(--danger-red);
+        }
+
+        @keyframes pulseBtn {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+                box-shadow: 0 0 40px var(--danger-red);
+            }
+        }
+
+        /* --- PAGE 3: LOCKED BOX --- */
+        #page3 {
+            background: #2a2a2a;
+            color: #ddd;
+        }
+
+        .mystery-box {
+            width: 250px;
+            height: 250px;
+            background: #8d6e63;
+            border: 10px solid #5d4037;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            color: #3e2723;
+        }
+
+        .shake-hard {
+            animation: shakeHard 0.2s infinite;
+        }
+
+        .box-breaking {
+            background: #a1887f;
+            border-color: #8d6e63;
+        }
+
+        @keyframes shakeHard {
+            0% {
+                transform: translate(0, 0) rotate(0);
+            }
+
+            25% {
+                transform: translate(-10px, 5px) rotate(-5deg);
+            }
+
+            50% {
+                transform: translate(5px, -10px) rotate(5deg);
+            }
+
+            75% {
+                transform: translate(-5px, 10px) rotate(-3deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0);
+            }
+        }
+
+        /* --- PAGE 4: CAKE --- */
+        #page4 {
+            background: radial-gradient(circle, #4a148c 0%, #000 100%);
+            color: white;
+            font-family: 'Sacramento', cursive;
+        }
+
+        .svg-cake-wrapper {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin-bottom: 50px;
+        }
+
+        .candle-container-svg {
+            position: absolute;
+            top: 35px;
+            left: 65px;
+            z-index: 10;
+            display: flex;
+            gap: 18px;
+        }
+
+        .candle-base {
+            width: 6.4px;
+            height: 15px;
+            position: relative;
+        }
+
+        .candle-base:nth-child(even) {
+            transform: translateY(15px);
+        }
+
+        .candle-base:nth-child(odd) {
+            transform: translateY(10px);
+        }
+
+        .flame {
+            width: 7px;
+            height: 15px;
+            background: orange;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: 0;
+            left: 30px;
+            box-shadow: 0 0 10px yellow;
+            animation: flicker 0.5s infinite alternate;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .flame.out {
+            opacity: 0;
+            transform: scale(0.5) translateY(-20px);
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .mic-instruction {
+            position: absolute;
+            bottom: 120px;
+            width: 100%;
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--sweet-gold);
+            text-shadow: 0 0 10px var(--sweet-gold);
+        }
+
+        .mic-status {
+            position: absolute;
+            bottom: 70px;
+            font-family: sans-serif;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .flame.out {
+            opacity: 0;
+            transform: scale(0);
+            width: 0;
+            height: 0;
+            box-shadow: none;
+        }
+
+
+
+        /* --- PAGE 5: MEMORIES --- */
+        #page5 {
+            background-color: var(--sweet-pink);
+            background-image: radial-gradient(#e0dcd3 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Indie Flower', cursive;
+            color: #4a4a4a;
+            overflow-y: auto;
+            display: block;
+            padding-bottom: 50px;
+        }
+
+        .final-header {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.5rem;
+            color: #d63384;
+            margin-top: 30px;
+        }
+
+        .polaroid-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 40px;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.15);
+            transform: rotate(-3deg);
+            width: 80%;
+            max-width: 350px;
+            transition: transform 0.3s;
+            animation: slideUp 1s forwards;
+            opacity: 0;
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(3deg);
+            animation-delay: 0.5s;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            filter: contrast(1.1) sepia(0.2);
+        }
+
+        .tape {
+            background-color: rgba(255, 255, 255, 0.6);
+            width: 100px;
+            height: 35px;
+            position: absolute;
+            top: -15px;
+            left: 35%;
+            transform: rotate(-2deg);
+            z-index: 10;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px) rotate(0);
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* --- NEW EFFECT OVERLAYS --- */
+        #effect-overlay {
+            z-index: 9999;
+            transition: opacity 0.1s;
+            opacity: 0;
+        }
+
+        /* 1. Flame Effect (Page 1 -> 2) */
+        .flame-effect {
+            display: flex !important;
+            opacity: 1 !important;
+            background: radial-gradient(circle at bottom, orange 0%, red 70%, black 100%);
+            box-shadow: 0 0 100px 50px orange;
+            animation: firepulse 0.2s infinite alternate;
+        }
+
+        @keyframes firepulse {
+            from {
+                opacity: 0.8;
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.01);
+            }
+        }
+
+        /* 2 & 3. Shatter/Explosion Effect (Page 2 -> 3 and Page 3 -> 4) */
+        .shatter-effect {
+            display: flex !important;
+            opacity: 1 !important;
+            animation: bombFlash 0.1s forwards;
+        }
+
+        @keyframes bombFlash {
+            0% {
+                background-color: white;
+            }
+
+            100% {
+                background-color: rgba(255, 0, 0, 0.8);
+            }
+        }
+
+        .shake-screen {
+            animation: shakeScreen 0.2s ease-in-out;
+        }
+
+        @keyframes shakeScreen {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(-3px, 0px) rotate(5deg);
+            }
+
+            50% {
+                transform: translate(3px, 1px) rotate(0deg);
+            }
+
+            75% {
+                transform: translate(-1px, -3px) rotate(-5deg);
+            }
+
+            100% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="alarm" loop autoplay src="/alarm-car.mp3"></audio>
+    <audio id="flame" loop src="flame.mp3"></audio>
+    <audio id="sirenSound" loop src="siren-a.mp3"></audio>
+    <audio id="boomSound" src="boom.mp3"></audio>
+    <audio id="crackSound" src="rock-break-hard.mp3"></audio>
+    <audio id="finalMusic" loop src=".mp3"></audio>
+
+    <div id="effect-overlay" class="full-screen hidden"></div>
+
+    <div id="page1" class="full-screen" onclick="overrideAlarm()">
+        <div class="warning-text">⚠️ WARNING ⚠️<br>HIGH VOLTAGE DETECTED</div>
+        <div class="sub-warning">Unauthorized Not Allow To Touch</div>
+        <div style="margin-top: 50px; font-size: 1rem;">[ Get Lost ]</div>
+    </div>
+
+    <div id="page2" class="full-screen hidden">
+        <h2 style="margin-bottom: 40px;">Whatever you do...</h2>
+        <div class="danger-btn" onclick="pressDangerButton()">DO NOT<br>PRESS</div>
+    </div>
+
+    <div id="page3" class="full-screen hidden">
+        <h2>A Mysterious Cargo...</h2>
+        <div id="box" class="mystery-box" onclick="tapBox()">🔒</div>
+        <div id="tapProgress" style="color: #ff5555; margin-top:10px;">Health: 100%</div>
+    </div>
+
+    <div id="page4" class="full-screen hidden">
+        <div class="mic-instruction">Blow out the candles! 🌬️💨</div>
+
+        <div class="svg-cake-wrapper">
+            <svg id="cakeSVG" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <g id="cake">
+                    <ellipse ry="65" rx="180" cy="380" cx="250" fill="#ffcdd2" />
+                    <path d="M70,380 v-100 a180,65 0 0,1 360,0 v100 a180,65 0 0,1 -360,0 z" fill="#ef9a9a" />
+                    <ellipse ry="65" rx="180" cy="280" cx="250" fill="#ffcdd2" />
+                    <ellipse ry="50" rx="130" cy="250" cx="250" fill="#f8bbd0" />
+                    <path d="M120,250 v-80 a130,50 0 0,1 260,0 v80 a130,50 0 0,1 -260,0 z" fill="#f48fb1" />
+                    <ellipse ry="50" rx="130" cy="170" cx="250" fill="#f8bbd0" />
+                    <path
+                        d="M120,170 c20,30 40,0 60,10 c20,10 40,-20 60,0 c20,20 40,-10 60,10 c20,20 40,-10 60,10 v20 a130,50 0 0,1 -240,10 z"
+                        fill="#ffffff" opacity="0.8" />
+                </g>
+                <g id="candles-svg">
+                    <rect x="160" y="110" width="12" height="60" fill="#fff" stroke="#ffcccb" stroke-width="2" />
+                    <rect x="200" y="120" width="12" height="60" fill="#fff" stroke="#ffcccb" stroke-width="2" />
+                    <rect x="240" y="110" width="12" height="60" fill="#fff" stroke="#ffcccb" stroke-width="2" />
+                    <rect x="280" y="120" width="12" height="60" fill="#fff" stroke="#ffcccb" stroke-width="2" />
+                    <rect x="320" y="110" width="12" height="60" fill="#fff" stroke="#ffcccb" stroke-width="2" />
+                </g>
+            </svg>
+            <div class="candle-container-svg">
+                <div class="candle-base">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle-base">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle-base">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle-base">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle-base">
+                    <div class="flame"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mic-status" id="micStatus">Waiting for mic permission...</div>
+    </div>
+
+    <div id="page5" class="hidden">
+        <canvas id="confetti-canvas"></canvas>
+        <div class="full-screen" style="position: relative; height: auto; display: block; text-align: center;">
+            <div class="final-header">Surprise! Happy Birthday! ❤️</div>
+            <div class="polaroid-container">
+                <div class="polaroid">
+                    <div class="tape"></div>
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&q=80" alt="Mem 1">
+                    <div class="caption">The Adventure Begins</div>
+                </div>
+                <div class="polaroid">
+                    <div class="tape"></div>
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500" alt="Mem 2">
+                    <div class="caption">So Pretty</div>
+                </div>
+            </div>
+            <div style="padding: 50px; font-size: 1.5rem;">You are the best thing that's ever happened to me.</div>
+        </div>
+    </div>
+
+    <script>
+        // Global State
+        let boxHealth = 100;
+        let candlesBlown = 0;
+        const totalCandles = 5;
+
+        // Audio Elements
+        const alarm = document.getElementById('alarm');
+        const flame = document.getElementById('flame');
+        const siren = document.getElementById('sirenSound');
+        const boom = document.getElementById('boomSound');
+        const crack = document.getElementById('crackSound');
+        const finalMusic = document.getElementById('finalMusic');
+        const overlay = document.getElementById('effect-overlay');
+
+        // --- ATTEMPT AUDIO ON LOAD ---
+        window.addEventListener('load', () => {
+            alarm.volume = 1;
+            alarm.play().catch(e => console.log("Browser blocked autoplay. Waiting for click."));
+        });
+
+        // --- PAGE 1 -> 2: FLAME EFFECT ---
+        function overrideAlarm() {
+            alarm.pause();
+            if (flame.paused) {
+                flame.play();
+            }
+
+
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flame-effect');
+
+
+            setTimeout(() => {
+                overlay.classList.remove('flame-effect');
+                overlay.classList.add('hidden');
+
+                document.getElementById('page1').classList.add('hidden');
+                document.getElementById('page2').classList.remove('hidden');
+
+                flame.pause();
+                siren.currentTime = 0;
+                siren.play();
+            }, 1500);
+        }
+
+        // --- PAGE 2 -> 3: BOOM SHATTER EFFECT ---
+        function pressDangerButton() {
+            siren.pause();
+            boom.volume = 1;
+
+            document.body.classList.add('shake-screen');
+            overlay.classList.remove('hidden');
+            overlay.classList.add('shatter-effect');
+
+            boom.play();
+
+            setTimeout(() => {
+                document.body.classList.remove('shake-screen');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('shatter-effect');
+
+                document.body.style.backgroundColor = '#000';
+                document.getElementById('page2').classList.add('hidden');
+                document.getElementById('page3').classList.remove('hidden');
+            }, 500);
+        }
+
+        // --- STAGE 3 (Tap Box) ---
+        function tapBox() {
+            const box = document.getElementById('box');
+            const progress = document.getElementById('tapProgress');
+            boxHealth -= 9;
+            crack.currentTime = 0;
+            crack.pause();
+            box.classList.add('shake-hard');
+            setTimeout(() => box.classList.remove('shake-hard'), 200);
+            if (boxHealth <= 40) box.classList.add('box-breaking');
+            if (boxHealth <= 15) box.innerHTML = '💥';
+            progress.innerText = `Health: ${boxHealth > 0 ? boxHealth : 0}%`;
+            if (boxHealth <= 0) {
+                crack.play();
+                box.style.display = 'none';
+                progress.innerText = "Broken!";
+                setTimeout(goToCakeStage, 1000);
+
+                document.body.classList.add('shake-screen');
+                overlay.classList.remove('hidden');
+                overlay.classList.add('shatter-effect');
+
+                setTimeout(() => {
+                    document.body.classList.remove('shake-screen');
+                    overlay.classList.add('hidden');
+                    overlay.classList.remove('shatter-effect');
+                    document.body.style.backgroundColor = '#000';
+                }, 1000);
+            }
+        }
+
+        // --- STAGE 3 to 4 (Go to Cake) ---
+        function goToCakeStage() {
+            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('page4').classList.remove('hidden');
+            initMicrophone();
+        }
+
+        // --- STAGE 4 (Mic Logic) - SENSITIVITY ---
+        async function initMicrophone() {
+            const micStatus = document.getElementById('micStatus');
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                micStatus.innerText = "Mic Active! Blow hard at your phone 🌬️";
+
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const analyser = audioContext.createAnalyser();
+                const microphone = audioContext.createMediaStreamSource(stream);
+                microphone.connect(analyser);
+                analyser.fftSize = 2048;
+
+                const bufferLength = analyser.fftSize;
+                const dataArray = new Uint8Array(bufferLength);
+
+                function checkBlow() {
+                    analyser.getByteTimeDomainData(dataArray);
+
+                    let sum = 0;
+                    for (let i = 0; i < bufferLength; i++) {
+                        let val = (dataArray[i] - 128) / 128;
+                        sum += val * val;
+                    }
+                    let rms = Math.sqrt(sum / bufferLength);
+
+                    if (rms > 0.1) {
+                        blowOutCandle();
+                    }
+
+                    if (candlesBlown < totalCandles) requestAnimationFrame(checkBlow);
+                }
+
+                checkBlow();
+
+            } catch (err) {
+                micStatus.innerHTML = "<span style='color:red'>Mic access denied. Please refresh and allow mic permission.</span>";
+            }
+        }
+
+        function blowOutCandle() {
+            const flames = document.querySelectorAll('.candle-base .flame');
+            const unlitFlames = Array.from(flames).filter(f => !f.classList.contains('out'));
+
+            if (unlitFlames.length === 0) return;
+
+            const randomIndex = Math.floor(Math.random() * unlitFlames.length);
+            const flame = unlitFlames[randomIndex];
+
+            flame.classList.add('out');
+            candlesBlown++;
+
+            if (candlesBlown === totalCandles) {
+                document.getElementById('micStatus').innerText = "Happy Birthday! 🎉";
+                setTimeout(goToFinale, 2000);
+            }
+        }
+
+
+
+        // --- STAGE 5 (Finale) ---
+        function goToFinale() {
+            finalMusic.volume = 0.5;
+            finalMusic.play();
+            document.getElementById('page4').classList.add('hidden');
+            document.getElementById('page5').classList.remove('hidden');
+            document.body.style.overflow = "auto";
+            startConfetti();
+        }
+
+        // Confetti
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const particles = [];
+        function startConfetti() {
+            for (let i = 0; i < 200; i++) particles.push({
+                x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height,
+                color: ['#ff6b81', '#ffd700', '#48dbfb'].sort(() => 0.5 - Math.random())[0],
+                size: Math.random() * 10 + 5, speed: Math.random() * 5 + 2, angle: Math.random() * 6
+            });
+            animateConfetti();
+        }
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                p.y += p.speed; p.x += Math.sin(p.angle); ctx.fillStyle = p.color; ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+                if (p.y > canvas.height) particles[i].y = -10;
+            });
+            requestAnimationFrame(animateConfetti);
+        }
+    </script>
+</body>
+
+</html>
